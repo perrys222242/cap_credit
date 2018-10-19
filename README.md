@@ -4,11 +4,21 @@
 
 ### Problem Statement
 
-   I will build a supervised machine-learning model to predict the probability of default for 30,000 credit-card customers in Taiwan (Republic of China).  My positive class represents 22% of the sample dataset, which defaulted on their October-2005 bill.
+   Credit-card lenders need help in detecting default-risk anomalies.   Customer demographic and borrowing history is studied and modeled to identify credit-card default risk.  The misclassifications must be carefully considered when making decisions affecting both loss mitigation and customer retention.  This is a supervised binary-classification problem with customers who default as the positive class, and unbalanced classes.  The baseline model predicts slightly more than 22% with default risk.  models should ideally be optimized to reduce false-negatives in applicant screening and false-positives active loss mitigation.
    
 ### Executive Summary
    
-   Credit-card lenders absorb significant losses from consumer defaults.  This capstone revolves around the detection of anomalies in customer demographic and borrowing history to identify credit-card default risk.  It is a binary classification problem with customers who default as the positive class, and unbalanced classes.  For supervised modeling, lenders are probably interested in not just the True-Positive (TP) rate, but also in the False-Negative (FN) and False-Positve (FP) rates. The best Estimator should minimize for both FN's and FP's while generalizing for TP's.
+   Financial losses from credit-card default are a big part of the cost of doing business as a consumer lender.  However, decisions based on identifying default risk must be made delicately to balance customer-retention interests.  A canonical dataset for credit-card borrowing history was used to train several predictive models for default risk.  Combining an easily-interpretable model with neural-network-based ones can lead to a robust solution for minimizing misclassifications.  A ‘logcosh’ loss-function was found to be effective for minimizing False-negative misclassifications while a ‘mean-squared-logarithmic-error’ loss function works to minimize False-positive misclassifications.  The former ‘logcosh’ model is also good at finding True-positives.  The logistic-regression model can find the strongest feature predictors which can be re-fed into the neural-network models to produce a better result.
+   
+   
+### Notebooks
+1) Data Cleaning
+2) Data Exploration
+3) Feature Engineering
+4) Model: Keras
+5) Model: TensorFlow
+6) Other Classifiers
+7) Evaluation
    
    
    Steps
@@ -97,4 +107,4 @@ Tamkang University,
 
 
 ### Conclusion
-
+   The logistic-regression model was the best model for True-Positive Rate score.  The CaRT model was a close second by the same measure.  With these models I was able to extract feature importances, highlighting 'Pay_0'
