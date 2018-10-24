@@ -104,7 +104,7 @@ Tamkang University,
 | 'default payment next month' | 0 | False |
 | 'default payment next month' | 1 | True |
 
-
+![Evaluation](https://git.generalassemb.ly/perry90034/credit/blob/master/cap_Pshyr/images/eval.jpg)
 
 ### Conclusion
-   The logistic-regression model was the best model for True-Positive Rate score.  The CaRT model was a close second by the same measure.  With these models I was able to extract feature importances, highlighting 'Pay_0'
+   Of the best three models examined in detail, I found the Classification-Trees model to offer the best balance of minimizing the Miss and Fall-Out rates.  As a reult, this is the model that I recommend that you implement and deploy for production.
