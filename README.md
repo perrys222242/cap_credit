@@ -7,7 +7,7 @@
    
 ### Executive Summary
 
-   I explored a widely-available dataset published in 2009 from research on defaults in the Taiwan credit-card lending market for this project.  I engineered two sets of monthly data for credit leverage and billing coverage, based on the credit-limit, billing and payments data provided for each of the six months prior to the defaulting observed in October-2005.  I trained five separate regression/decision-tree/machine-learning models using a portion of the dataset and tested the same on a held portion to validate the model performances. I looked at the top-three models more closely to determine which model might deliver the right balance of minimal misclassification, and in doing so highlighted the data-columns that were the strongest predictors of the default accounts.  I conclude that this classification-trees model will offer the optimal results if deployed in production to solve the default-classification problem stated above.
+   I explored a widely-available dataset published in 2009 from research on defaults in the Taiwan credit-card lending market for this project.  I engineered two sets of monthly data for credit leverage and billing coverage, based on the credit-limit, billing and payments data provided for each of the six months prior to the defaulting observed in October-2005.  I trained five separate regression/decision-tree/machine-learning models using a portion of the dataset and tested the same on a held portion to validate the model performances. None of the models scored appreciably better than the baseline model.  I looked at the top-three models more closely to determine which model might deliver the right balance of minimal misclassification, and in doing so highlighted the data-columns that were the strongest predictors of the default accounts.  I conclude that this classification-trees model will offer the optimal results if deployed in production to solve the default-classification problem stated above.
      
    
 ### Research
@@ -25,6 +25,8 @@ Actual default rate in Taiwan is about 3.6% of total accounts.
 
    
 ### Report Contents
+
+This technical report is divided into seven notebooks with the following topics:
 
 | Notebook | Description |
 | --- | --- |
@@ -70,27 +72,50 @@ Actual default rate in Taiwan is about 3.6% of total accounts.
 | 'default payment next month' | 1 | True |
 
 
+### Findings
+
+(a) 35 duplicate rows found and dropped.
+(b) Although "gender," 'EDUCATION' and 'MARRIAGE' are numeric columns, their discrete values should be encoded into separate features.
+
+
 ### Features Engineered
 
 
-| New Features | Value | Description |
-| --- | --- | --- |
-| 'LIMIT_BAL' | (integer) | Credit limit |
+| New Features | Description |
+| --- | --- |
+| 'leverage_#' | Ratio of monthly billing-amount to credit-limit |
+| 'bill_to_pay#' | Ratio of monthly billing-amount to monthly payment-amount |
 
-### Feature Importances
+
+### Top Feature Importances/Weights
 
 
 | Order | LofReg Weightings | Weights |
 | --- | --- | --- |
-| 1 | Sep-History status | value |
+| 1 | Sep-Payment status | 0.6 |
+| 2 | Sep-Bill/Payment | 0.2 |
+| 3 | Aug-Bill/Limit | 0.16 |
+| 40 | Credit limit | -0.17 |
+| 41 | Sep-Payment amount | -0.23 |
+| 42 | Sep-Bill/Limit | -0.32 |
 
 
 | Order | CaRT Importances | Importances |
 | --- | --- | --- |
-| 1 | Sep-Billing | value
+| 1 | Aug-Bill-amount | 0.016
+| 2 | Credit limit | 0.015
+| 3 | Sep-Payment-amount | 0.0122
+| 4 | Sep-Bill-amount | 0.0120
+| 5 | Jul-Payment-amount | 0.011
+
+
+### Comparing the Top-3 Models
 
 ![Evaluation](https://git.generalassemb.ly/perry90034/credit/blob/master/cap_Pshyr/images/eval.jpg)
 
+For this anomaly-detection problem, we are not so much wanting to know how much more accurate a model is at classifying default-prone accounts because none of the top models performs significantly better than the baseline model.  We are more interested in the balance between minimizing false-negatives (actual losses) and minimizing false-positives (lost business).  Such comparison of the three models above suggests that the Classification-Trees models offers a better balance than either the neural-networks and logistic-regression models.
+
+
 ### Conclusion
 
-   Of the best three models examined in detail, I found the Classification-Trees model to offer the best balance of minimizing the Miss and Fall-Out rates.  As a reult, this is the model that I recommend that you implement and deploy for production.
+   My problem statement asked if I can predict credit-card accounts that would default while controlling for the two types of misclassifications. Although none of my models scored appreciably better than the baseline model, I believe that using a Classification-Trees model offers the best results. The dataset is clearly unbalanced and with the Default class as the minority, our preferred model delivered a 57.4% True-Positive rate which is a significantly better result than our baseline model which predicts only Non-Defaults. The top feature importances for the Classification-Trees model were associated with the Payment-history, Payment-amounts and August-September-related features. This confirms that it trained well for falling average payments leading up to the defaults in the October period, which suggests increasing financial strain on accountholders.
