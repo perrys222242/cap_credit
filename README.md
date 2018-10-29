@@ -90,7 +90,7 @@ This technical report is divided into seven notebooks with the following topics:
 ### Top Feature Importances/Weights
 
 
-| Order | LofReg Weightings | Weights |
+| Order | LogReg Weightings | Weights |
 | --- | --- | --- |
 | 1 | Sep-Payment status | 0.6 |
 | 2 | Sep-Bill/Payment | 0.2 |
