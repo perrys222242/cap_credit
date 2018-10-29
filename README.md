@@ -111,7 +111,7 @@ This technical report is divided into seven notebooks with the following topics:
 
 ### Comparing the Top-3 Models
 
-![Evaluation](https://git.generalassemb.ly/perry90034/credit/blob/master/cap_Pshyr/images/eval.jpg)
+![Evaluation](https://github.com/perrys222242/cap_credit/blob/master/image_files/eval.jpg)
 
 For this anomaly-detection problem, we are not so much wanting to know how much more accurate a model is at classifying default-prone accounts because none of the top models performs significantly better than the baseline model.  We are more interested in the balance between minimizing false-negatives (actual losses) and minimizing false-positives (lost business).  Such comparison of the three models above suggests that the Classification-Trees models offers a better balance than either the neural-networks and logistic-regression models.
 
