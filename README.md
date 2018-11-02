@@ -1,5 +1,5 @@
 # Credit-card Default Risk
-#### by Perry S.
+by Perry S.
 
 ### Problem Statement
 
